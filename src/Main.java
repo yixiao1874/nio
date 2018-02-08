@@ -5,22 +5,27 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.Selector;
 
 public class Main {
+    public void change(Car car){
+        car.setColor("red");
+    }
 
     public static void main(String[] args) throws Exception{
-        FileInputStream fis = new FileInputStream("C:\\usr\\a.txt");
-        FileChannel fcin = fis.getChannel();
-
-        FileOutputStream fos = new FileOutputStream("C:\\usr\\b.txt");
-        FileChannel fcOut = fos.getChannel();
-
-        ByteBuffer buf = ByteBuffer.allocate(10);
-        while (fcin.read(buf) != -1){
-            buf.flip();
-            fcOut.write(buf);
-            buf.clear();
-        }
-
-        fcin.close();
-        fcOut.close();
+        Car car = new Car();
+        car.setColor("green");
+        System.out.println(car.getColor());
+        new Main().change(car);
+        System.out.println(car.getColor());
     }
+}
+
+class Car{
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    private String color;
 }
